@@ -1,1 +1,62 @@
-<p>edit-client works!</p>
+<div class="row my-4">
+    <div class="col-md-6">
+        <h1>Edit Client</h1>
+    </div>
+    <div class="col-md-6 text-right">
+        <a routerLink="/clients" class="btn btn-link">
+            <i class="fa fa-arrow-left mr-2"></i>Back to list
+        </a>
+    </div>
+</div>
+
+<div class="row mt-3">
+    <div class="col-md-6 mx-auto">
+        <form [formGroup]="clientForm" (submit)="updateClient()">
+            <div class="form-group">
+                <label for="firstName">firstName</label>
+                <input formControlName="firstName" type="text" class="form-control" id="firstName"> <!--pour desactiver le cache on ajoute autocomplet="off" dans l'input-->
+                <div *ngIf="clientForm.get('firstName').invalid  && clientForm.get('firstName').touched"
+                     class="alert alert-danger">
+                    <div *ngIf="clientForm.get('firstName').errors.required">this field is required !</div>
+                    <div *ngIf="clientForm.get('firstName').errors.minlength">this field must have at least 3 char</div>
+                </div> 
+            </div>
+            <div class="form-group">
+                <label for="lastName">lastName</label>
+                <input formControlName="lastName" type="text" class="form-control" id="lastName" >
+                <div *ngIf="clientForm.get('lastName').invalid  && clientForm.get('lastName').touched"
+                     class="alert alert-danger">
+                    <div *ngIf="clientForm.get('lastName').errors.required">this field is required !</div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="email">email</label>
+                <input formControlName="email" type="text" class="form-control" id="email">
+                <div *ngIf="clientForm.get('email').invalid  && clientForm.get('email').touched"
+                     class="alert alert-danger">
+                    <div *ngIf="clientForm.get('email').errors.email">this field must be a mail</div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="phone">phone</label>
+                <input formControlName="phone" type="text" class="form-control" id="phone">
+                <div *ngIf="clientForm.get('phone').invalid  && clientForm.get('phone').touched"
+                     class="alert alert-danger">
+                    <div *ngIf="clientForm.get('phone').errors.required">this field is required !</div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="balance">balance</label>
+                <input formControlName="balance" type="text" class="form-control" id="balance">
+                <div *ngIf="clientForm.get('balance').invalid  && clientForm.get('balance').touched"
+                     class="alert alert-danger">
+                    <div *ngIf="clientForm.get('balance').errors.pattern">this field accept only number !</div>
+                </div>
+            </div>
+            
+            <button [disabled]="clientForm.valid" class="btn btn-warning btn-block">
+                <i class="fa fa-refresh mr-2"></i>Update Client
+            </button>
+        </form>
+    </div>
+</div>
