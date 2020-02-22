@@ -1,1 +1,44 @@
-<p>list-client works!</p>
+<div class="row my-3">
+    <div class="col-md-6">
+        <h1>List of Cliets</h1>
+    </div>
+    <div class="col-md-6 text-right">
+        <button class="btn btn-outline-success rounded-circle" title="Add New Client">
+            <i class="fa fa-plus"></i>
+        </button>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <table class="table table-striped">
+            <thead>
+                <tr class="table-success">
+                    <th>firstName</th>
+                    <th>lastName</th>
+                    <th>Email</th>
+                    <th>Phone</th>
+                    <th>Balance</th>
+                    <th><i class="fa fa-cog fa-spin mr-2"></i>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let client of clients">
+                    <td>{{ client.firstName }}</td>
+                    <td>{{ client.lastName }}</td>
+                    <td>{{ client.email }}</td>
+                    <td>{{ client.phone }}</td>
+                    <td>{{ client.balance}} <span class="text-dark">$</span></td>
+                    <td>
+                        <a class="btn btn-sm btn-warning mx-2" routerLink="">
+                            <i class="fa fa-pencil"></i> 
+                        </a> 
+                        <button class="btn btn-sm btn-danger">
+                            <i class="fa fa-trash"></i> 
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
