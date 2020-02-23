@@ -5,7 +5,7 @@
         <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="collapsibleNavId">
-        <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+        <ul *ngIf="currentUser" class="navbar-nav mr-auto mt-2 mt-lg-0">
             <li class="nav-item" routerLinkActive="active">
                 <a class="nav-link" routerLink="/clients">
                     <i class="fa fa-home"></i>
@@ -18,15 +18,25 @@
             </li>
         </ul>
         <ul class="navbar-nav ml-auto">
-            <li class="nav-item" routerLinkActive="active">
-                <a class="nav-link" routerLink="/register">
+            <li *ngIf="!currentUser" class="nav-item" routerLinkActive="active">
+                <a class="nav-link" routerLink="/register"> 
                     <i class="fa fa-user-circle"></i>
                     Register</a>
             </li>
-            <li class="nav-item" routerLinkActive="active">
+            <li *ngIf="!currentUser" class="nav-item" routerLinkActive="active">
                 <a class="nav-link" routerLink="/login">
                     <i class="fa fa-sign-in"></i>
                     Login</a>
+            </li>
+            <li *ngIf="currentUser" class="nav-item" routerLinkActive="active">
+                <button class="nav-link btn-logout">
+                    <i class="fa fa-user-circle"></i>
+                    {{currentUser.email}}</button>
+            </li>
+            <li *ngIf="currentUser" class="nav-item" routerLinkActive="active">
+                <button class="nav-link btn-logout" (click)="logout()">
+                    <i class="fa fa-sign-out mr-1"></i>
+                    Logout</button>
             </li>
         </ul>
     </div>

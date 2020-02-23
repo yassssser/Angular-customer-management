@@ -12,6 +12,10 @@ import Swal from 'sweetalert2'
 export class ListClientComponent implements OnInit {
 
   clients: Client[] = []
+  oldClients: Client[] = []
+  search = ""
+  total: number = 0
+
   constructor(private toastr: ToastrService, private clientService: ClientService) { }
 
   ngOnInit(): void {
@@ -19,7 +23,9 @@ export class ListClientComponent implements OnInit {
   }
 
   getAll(){
-    this.clientService._getAll().subscribe((res : Client[]) => this.clients = res)
+    this.clientService._getAll().subscribe((res : Client[]) => {
+                                          this.oldClients = this.clients = res
+                                          this.totalBalance()           })
   }
 
   destroyClient(id: string){
@@ -60,5 +66,26 @@ export class ListClientComponent implements OnInit {
         })
       }
     })
+  }
+
+  searchUsers(){
+    if(!this.search){
+      this.clients = this.oldClients
+      this.totalBalance() 
+      return ;
+    }
+   this.clients = this.clients.filter(
+                                    client => 
+                                      client.firstName.includes(this.search) || 
+                                      client.lastName.includes(this.search) || 
+                                      client.email.includes(this.search)
+                                  )
+   this.totalBalance() 
+  }
+
+  totalBalance(){
+    this.total = this.clients.reduce((total, client) => {
+      return total + (+client.balance);
+    }, 0)
   }
 }

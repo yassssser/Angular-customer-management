@@ -9,6 +9,31 @@
     </div>
 </div>
 
+<div class="row my-2">
+    <div class="col-md-3 ml-auto">
+        <div class="input-group-prepend">
+            <span class="input-group-text text-success" id="basic-addon1">
+                <i class="fa fa-usd"></i>
+            </span>
+            <input type="text" [(ngModel)]="total" readonly class="form-control" placeholder="Total in $$">
+        </div>
+    </div>
+</div>
+
+
+<div class="row my-2">
+    <div class="col-md-12 input-group">
+        <div class="input-group-prepend">
+            <span class="input-group-text text-primary" id="basic-addon1">
+                <i class="fa fa-search"></i>
+            </span>
+        </div>
+        <input type="text" [(ngModel)]="search"
+                           (keyup)="searchUsers()"
+                           class="form-control" placeholder="Search for User..." />
+    </div>
+</div>
+
 <div class="row">
     <div class="col-md-12">
         <table class="table table-striped">
